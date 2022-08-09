@@ -1,4 +1,4 @@
-﻿namespace Chess
+﻿ namespace Chess
 {
     partial class Form1
     {
