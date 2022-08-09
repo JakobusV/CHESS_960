@@ -38,15 +38,11 @@ namespace Chess
         {
             InitializeComponent();
 
-<<<<<<< Updated upstream
             // --------- put your path and comment others out-------
             //chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
             //chessSprites = new Bitmap("C:\\Users\\Justin\\OneDrive\\school\\year 2\\Software in existing code\\GroupChessProject\\Chess_960\\ChessGame-master\\Chess\\Sprites\\chess.png");
-
-=======
             chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
             
->>>>>>> Stashed changes
             //button1.BackgroundImage = part;
 
             Init();
