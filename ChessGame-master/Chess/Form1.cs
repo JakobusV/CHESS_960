@@ -51,15 +51,17 @@ namespace Chess
 
         public int[,] GenerateGrid(string positions)
         {
+            // generate grid object
             int[,] grid = null;
 
+            // create skeleton grid with pawns
             grid = new int[8, 8]
             {
             {0,0,0,0,0,0,0,0},
             {16,16,16,16,16,16,16,16 },
             {0,0,0,0,0,0,0,0 },
-            {0,0,0,0,0,0,0,0 },
-            {0,0,0,0,0,0,0,0 },
+            {0,0,0,0,0,0,0,0 }, // Note that the 10's are white,
+            {0,0,0,0,0,0,0,0 }, // and the 20's are black.
             {0,0,0,0,0,0,0,0 },
             {26,26,26,26,26,26,26,26 },
             {0,0,0,0,0,0,0,0},
@@ -73,29 +75,30 @@ namespace Chess
                 // place respective black and white piece
                 switch (p)
                 {
-                    case 'r':
+                    case 'r': // rook
                         grid[0, i] = 15;
                         grid[7, i] = 25;
                         break;
-                    case 'n':
+                    case 'n': // knight
                         grid[0, i] = 14;
                         grid[7, i] = 24;
                         break;
-                    case 'b':
+                    case 'b': // bishop
                         grid[0, i] = 13;
                         grid[7, i] = 23;
                         break;
-                    case 'q':
+                    case 'q': // queen
                         grid[0, i] = 12;
                         grid[7, i] = 22;
                         break;
-                    case 'k':
+                    case 'k': // king
                         grid[0, i] = 11;
                         grid[7, i] = 21;
                         break;
                 }
             }
             
+            // return int[,]
             return grid;
         }
 
@@ -108,15 +111,17 @@ namespace Chess
 
         public void Init()
         {
-            Console.WriteLine(this.Height);
-
+            // default chess
             string positions = "rnbqkbnr";
 
+            // if user has selected to play chess 960
             if (isChess960)
             {
+                // generate and overwrite original setup
                 positions = Chess960Positions();
             }
 
+            // apply new layout
             map = GenerateGrid(positions);
 
             currPlayer = 1;
@@ -471,16 +476,19 @@ namespace Chess
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // this.Controls.Clear();
+            // this.Controls.Clear(); old restart would wipe the entire form out and just create new board, no other controls
+            // now, loops through and grabs only buttons and clears them one by one.
             foreach (Button button in butts)
             {
                 this.Controls.Remove(button);
             }
+            // then restart
             Init();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            // checked = true, unchecked = false
             isChess960 = checkBox1.Checked;
         }
     }
