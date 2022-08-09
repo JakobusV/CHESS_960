@@ -48,26 +48,71 @@ namespace Chess
             Init();
         }
 
-        public int[,] GenerateGrid()
+        public int[,] GenerateGrid(string positions)
         {
-            // Choose which grid here.
-            int[,] grid = new int[8, 8]
+            int[,] grid = null;
+
+            grid = new int[8, 8]
             {
-            {15,14,13,12,11,13,14,15 },
+            {0,0,0,0,0,0,0,0},
             {16,16,16,16,16,16,16,16 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {26,26,26,26,26,26,26,26 },
-            {25,24,23,22,21,23,24,25 },
+            {0,0,0,0,0,0,0,0},
             };
+
+            // for each letter in position string
+            for (int i = 0; i < positions.Length; i++)
+            {
+                // get current positions letter
+                char p = positions[i];
+                // place respective black and white piece
+                switch (p)
+                {
+                    case 'r':
+                        grid[0, i] = 15;
+                        grid[7, i] = 25;
+                        break;
+                    case 'n':
+                        grid[0, i] = 14;
+                        grid[7, i] = 24;
+                        break;
+                    case 'b':
+                        grid[0, i] = 13;
+                        grid[7, i] = 23;
+                        break;
+                    case 'q':
+                        grid[0, i] = 12;
+                        grid[7, i] = 22;
+                        break;
+                    case 'k':
+                        grid[0, i] = 11;
+                        grid[7, i] = 21;
+                        break;
+                }
+            }
+            
             return grid;
+        }
+
+        public string Chess960Positions()
+        {
+            return chessSprites.ToString();
         }
 
         public void Init()
         {
-            map = GenerateGrid();
+            string positions = "rnbqkbnr";
+
+            if (isChess960)
+            {
+                positions = Chess960Positions();
+            }
+
+            map = GenerateGrid(positions);
 
             currPlayer = 1;
             CreateMap();
