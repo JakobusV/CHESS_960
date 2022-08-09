@@ -46,6 +46,7 @@ namespace Chess
 
         public int[,] GenerateGrid()
         {
+            // Choose which grid here.
             int[,] grid = new int[8, 8]
             {
             {15,14,13,12,11,13,14,15 },
