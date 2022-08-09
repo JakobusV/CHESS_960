@@ -13,6 +13,7 @@ namespace Chess
     public partial class Form1 : Form
     {
         public Image chessSprites;
+        public bool isChess960;
         public int[,] map = new int[8, 8]
         {
             {15,14,13,12,11,13,14,15 },
@@ -37,10 +38,15 @@ namespace Chess
         {
             InitializeComponent();
 
+<<<<<<< Updated upstream
             // --------- put your path and comment others out-------
             //chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
             //chessSprites = new Bitmap("C:\\Users\\Justin\\OneDrive\\school\\year 2\\Software in existing code\\GroupChessProject\\Chess_960\\ChessGame-master\\Chess\\Sprites\\chess.png");
 
+=======
+            chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
+            
+>>>>>>> Stashed changes
             //button1.BackgroundImage = part;
 
             Init();
@@ -421,6 +427,11 @@ namespace Chess
         {
             this.Controls.Clear();
             Init();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            isChess960 = checkBox1.Checked;
         }
     }
 }
