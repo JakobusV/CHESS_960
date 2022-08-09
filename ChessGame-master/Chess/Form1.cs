@@ -14,6 +14,7 @@ namespace Chess
     {
         public Image chessSprites;
         public bool isChess960;
+        public int seed;
         public int[,] map = new int[8, 8]
         {
             {15,14,13,12,11,13,14,15 },
@@ -100,11 +101,15 @@ namespace Chess
 
         public string Chess960Positions()
         {
-            return chessSprites.ToString();
+            
+
+            return "";
         }
 
         public void Init()
         {
+            Console.WriteLine(this.Height);
+
             string positions = "rnbqkbnr";
 
             if (isChess960)
@@ -466,7 +471,11 @@ namespace Chess
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
+            // this.Controls.Clear();
+            foreach (Button button in butts)
+            {
+                this.Controls.Remove(button);
+            }
             Init();
         }
 
