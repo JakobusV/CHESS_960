@@ -37,7 +37,7 @@ namespace Chess
         {
             InitializeComponent();
 
-            chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
+            chessSprites = new Bitmap("C:\\Users\\jwilliams\\OneDrive\\Documents\\Y2 Neumont\\Summer 2022 Y2\\Projects In Exitisting Code\\Chess960\\ChessGame-master\\Chess\\Sprites\\chess.png");
             
             //button1.BackgroundImage = part;
 
