@@ -13,6 +13,7 @@ namespace Chess
     public partial class Form1 : Form
     {
         public Image chessSprites;
+        public bool isChess960;
         public int[,] map = new int[8, 8]
         {
             {15,14,13,12,11,13,14,15 },
@@ -37,26 +38,85 @@ namespace Chess
         {
             InitializeComponent();
 
+<<<<<<< HEAD
             chessSprites = new Bitmap("C:\\Users\\jwilliams\\OneDrive\\Documents\\Y2 Neumont\\Summer 2022 Y2\\Projects In Exitisting Code\\Chess960\\ChessGame-master\\Chess\\Sprites\\chess.png");
+=======
+            // --------- put your path and comment others out-------
+            //chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
+            //chessSprites = new Bitmap("C:\\Users\\Justin\\OneDrive\\school\\year 2\\Software in existing code\\GroupChessProject\\Chess_960\\ChessGame-master\\Chess\\Sprites\\chess.png");
+            chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
+>>>>>>> origin/chess960
             
             //button1.BackgroundImage = part;
 
             Init();
         }
 
-        public void Init()
+        public int[,] GenerateGrid(string positions)
         {
-            map = new int[8, 8]
+            int[,] grid = null;
+
+            grid = new int[8, 8]
             {
-            {15,14,13,12,11,13,14,15 },
+            {0,0,0,0,0,0,0,0},
             {16,16,16,16,16,16,16,16 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {0,0,0,0,0,0,0,0 },
             {26,26,26,26,26,26,26,26 },
-            {25,24,23,22,21,23,24,25 },
+            {0,0,0,0,0,0,0,0},
             };
+
+            // for each letter in position string
+            for (int i = 0; i < positions.Length; i++)
+            {
+                // get current positions letter
+                char p = positions[i];
+                // place respective black and white piece
+                switch (p)
+                {
+                    case 'r':
+                        grid[0, i] = 15;
+                        grid[7, i] = 25;
+                        break;
+                    case 'n':
+                        grid[0, i] = 14;
+                        grid[7, i] = 24;
+                        break;
+                    case 'b':
+                        grid[0, i] = 13;
+                        grid[7, i] = 23;
+                        break;
+                    case 'q':
+                        grid[0, i] = 12;
+                        grid[7, i] = 22;
+                        break;
+                    case 'k':
+                        grid[0, i] = 11;
+                        grid[7, i] = 21;
+                        break;
+                }
+            }
+            
+            return grid;
+        }
+
+        public string Chess960Positions()
+        {
+            return chessSprites.ToString();
+        }
+
+        public void Init()
+        {
+            string positions = "rnbqkbnr";
+
+            if (isChess960)
+            {
+                positions = Chess960Positions();
+            }
+
+            map = GenerateGrid(positions);
 
             currPlayer = 1;
             CreateMap();
@@ -414,6 +474,13 @@ namespace Chess
             Init();
         }
 
+<<<<<<< HEAD
 
+=======
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            isChess960 = checkBox1.Checked;
+        }
+>>>>>>> origin/chess960
     }
 }
