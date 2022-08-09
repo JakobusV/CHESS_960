@@ -14,7 +14,7 @@ namespace Chess
     {
         public Image chessSprites;
         public bool isChess960;
-        public int seed;
+        public NumericUpDown numeric;
         public int[,] map = new int[8, 8]
         {
             {15,14,13,12,11,13,14,15 },
@@ -43,8 +43,11 @@ namespace Chess
             //chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
             //chessSprites = new Bitmap("C:\\Users\\Justin\\OneDrive\\school\\year 2\\Software in existing code\\GroupChessProject\\Chess_960\\ChessGame-master\\Chess\\Sprites\\chess.png");
             chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
-            
+
             //button1.BackgroundImage = part;
+
+            // get seed input
+            numeric = (NumericUpDown)this.Controls.Find("numUpDown", true)[0];
 
             Init();
         }
@@ -102,11 +105,110 @@ namespace Chess
             return grid;
         }
 
-        public string Chess960Positions()
+        public string Chess960Positions(int seed)
         {
-            
+            // soon to by modified string representing light and dark tiles
+            StringBuilder results = new StringBuilder("________"); 
+            //                                         abcdefgh
+            //                                         01234567
+            // validate seed
+            if (seed < 0 || seed > 959)
+            {
+                // return default layout
+                return "rnbqkbnr";
+            }
 
-            return "";
+            // used for setting location of specific pieces
+            int remainder;
+
+            // first calculation for light bishop
+            remainder = seed % 4;
+            seed = seed / 4;
+            results[(remainder * 2) + 1] = 'b'; // 0 = b, 1 = d, 2 = f, 3 = h
+            Console.WriteLine("first: " + seed + "r" + remainder);
+            
+            // second calculation for dark bishup
+            remainder = seed % 4;
+            seed = seed / 4;
+            results[remainder * 2] = 'b'; // 0 = a, 1 = c, 2 = e, 3 = g
+            Console.WriteLine("second: " + seed + "r" + remainder);
+
+            // third calculation for queen
+            remainder = seed % 6;
+            seed = seed / 6;
+            Console.WriteLine("third: " + seed + "r" + remainder);
+
+            // track leftover indexes
+            List<int> index_left = new List<int>();
+            // get remaining spaces
+            for (int i = 0; i < results.Length; i++)
+            {
+                // for each char that is blank
+                if (results[i] == '_')
+                {
+                    // add to leftover indexes
+                    index_left.Add(i);
+                }
+            }
+
+            // add queen and remove index from tracker
+            results[index_left[remainder]] = 'q';
+            index_left.Remove(remainder);
+
+            // get order for last characters
+            string KRNcode = GetKernCode(seed);
+
+            // for each character, set in next available index then remove index from list
+            foreach (char c in KRNcode)
+            {
+                results[index_left[0]] = 'c';
+                index_left.RemoveAt(0);
+            }
+
+            return results.ToString();
+        }
+
+        public string GetKernCode(int seed)
+        {
+            string kern = "";
+            switch (seed)
+            {
+                case 0:
+                    kern = "nnrkr";
+                    break;
+                case 1:
+                    kern = "nrnkr";
+                    break;
+                case 2:
+                    kern = "nrknr";
+                    break;
+                case 3:
+                    kern = "nrkrn";
+                    break;
+                case 4:
+                    kern = "rnnkr";
+                    break;
+                case 5:
+                    kern = "rnknr";
+                    break;
+                case 6:
+                    kern = "rnkrn";
+                    break;
+                case 7:
+                    kern = "rknnr";
+                    break;
+                case 8:
+                    kern = "rknrn";
+                    break;
+                case 9:
+                    kern = "rkrnn";
+                    break;
+                default:
+                    // this is for debuggin, if you get a layout with 5 knights, something went wrong.
+                    kern = "nnnnn";
+                    break;
+            }
+            return kern;
         }
 
         public void Init()
@@ -117,8 +219,11 @@ namespace Chess
             // if user has selected to play chess 960
             if (isChess960)
             {
+                // get seed from input
+                int seed = (int)numeric.Value;
+
                 // generate and overwrite original setup
-                positions = Chess960Positions();
+                positions = Chess960Positions(seed);
             }
 
             // apply new layout
