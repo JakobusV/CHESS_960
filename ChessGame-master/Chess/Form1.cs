@@ -413,5 +413,7 @@ namespace Chess
             this.Controls.Clear();
             Init();
         }
+
+
     }
 }
