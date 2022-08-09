@@ -38,14 +38,11 @@ namespace Chess
         {
             InitializeComponent();
 
-<<<<<<< HEAD
             chessSprites = new Bitmap("C:\\Users\\jwilliams\\OneDrive\\Documents\\Y2 Neumont\\Summer 2022 Y2\\Projects In Exitisting Code\\Chess960\\ChessGame-master\\Chess\\Sprites\\chess.png");
-=======
             // --------- put your path and comment others out-------
             //chessSprites = new Bitmap("C:\\Users\\sodrk\\Desktop\\chess.png");
             //chessSprites = new Bitmap("C:\\Users\\Justin\\OneDrive\\school\\year 2\\Software in existing code\\GroupChessProject\\Chess_960\\ChessGame-master\\Chess\\Sprites\\chess.png");
-            chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
->>>>>>> origin/chess960
+            //chessSprites = new Bitmap("C://Users//javanderniet//Documents//GitHub//Chess_960//ChessGame-master//Chess//Sprites//chess.png");
             
             //button1.BackgroundImage = part;
 
@@ -474,13 +471,9 @@ namespace Chess
             Init();
         }
 
-<<<<<<< HEAD
-
-=======
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             isChess960 = checkBox1.Checked;
         }
->>>>>>> origin/chess960
     }
 }
