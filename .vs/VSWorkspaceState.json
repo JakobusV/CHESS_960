@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ChessGame-master",
+    "\\ChessGame-master\\Chess"
   ],
-  "SelectedNode": "\\Chess.sln",
+  "SelectedNode": "\\ChessGame-master\\Chess\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
