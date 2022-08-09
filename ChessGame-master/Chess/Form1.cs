@@ -44,9 +44,9 @@ namespace Chess
             Init();
         }
 
-        public void Init()
+        public int[,] GenerateGrid()
         {
-            map = new int[8, 8]
+            int[,] grid = new int[8, 8]
             {
             {15,14,13,12,11,13,14,15 },
             {16,16,16,16,16,16,16,16 },
@@ -57,6 +57,12 @@ namespace Chess
             {26,26,26,26,26,26,26,26 },
             {25,24,23,22,21,23,24,25 },
             };
+            return grid;
+        }
+
+        public void Init()
+        {
+            map = GenerateGrid();
 
             currPlayer = 1;
             CreateMap();
