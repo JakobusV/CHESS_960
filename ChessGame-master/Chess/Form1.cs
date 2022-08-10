@@ -208,7 +208,7 @@ namespace Chess
                     kern = "rkrnn";
                     break;
                 default:
-                    // this is for debuggin, if you get a layout with 5 knights, something went wrong.
+                    // this is for testing, if you get a layout with 5 knights, something went wrong.
                     kern = "nnnnn";
                     break;
             }
