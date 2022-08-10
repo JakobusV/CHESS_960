@@ -112,10 +112,14 @@ namespace Chess
             //                                         abcdefgh
             //                                         01234567
             // validate seed
-            if (seed < 0 || seed > 959)
+            if (seed < 0 || seed > 960)
             {
                 // return default layout
                 return "rnbqkbnr";
+            } else if (seed == 960)
+            {
+                // generate a random number from 0 - 959
+                seed = new Random().Next(seed);
             }
 
             // used for setting location of specific pieces
@@ -153,7 +157,7 @@ namespace Chess
 
             // add queen and remove index from tracker
             results[index_left[remainder]] = 'q';
-            index_left.Remove(remainder);
+            index_left.RemoveAt(remainder);
 
             // get order for last characters
             string KRNcode = GetKernCode(seed);
@@ -161,7 +165,7 @@ namespace Chess
             // for each character, set in next available index then remove index from list
             foreach (char c in KRNcode)
             {
-                results[index_left[0]] = 'c';
+                results[index_left[0]] = c;
                 index_left.RemoveAt(0);
             }
 
