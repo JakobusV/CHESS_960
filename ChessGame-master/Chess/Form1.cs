@@ -120,6 +120,7 @@ namespace Chess
             {
                 // generate a random number from 0 - 959
                 seed = new Random().Next(seed);
+                // Console.WriteLine(seed); //DEBUG
             }
 
             // used for setting location of specific pieces
@@ -129,18 +130,18 @@ namespace Chess
             remainder = seed % 4;
             seed = seed / 4;
             results[(remainder * 2) + 1] = 'b'; // 0 = b, 1 = d, 2 = f, 3 = h
-            Console.WriteLine("first: " + seed + "r" + remainder);
+            // Console.WriteLine("first: " + seed + "r" + remainder); //DEBUG
             
             // second calculation for dark bishup
             remainder = seed % 4;
             seed = seed / 4;
             results[remainder * 2] = 'b'; // 0 = a, 1 = c, 2 = e, 3 = g
-            Console.WriteLine("second: " + seed + "r" + remainder);
+            // Console.WriteLine("second: " + seed + "r" + remainder); //DEBUG
 
             // third calculation for queen
             remainder = seed % 6;
             seed = seed / 6;
-            Console.WriteLine("third: " + seed + "r" + remainder);
+            // Console.WriteLine("third: " + seed + "r" + remainder); //DEBUG
 
             // track leftover indexes
             List<int> index_left = new List<int>();
@@ -172,6 +173,11 @@ namespace Chess
             return results.ToString();
         }
 
+        /// <summary>
+        /// Get KRN pattern based on an int between 0-9.
+        /// </summary>
+        /// <param name="seed">Input to get correct code.</param>
+        /// <returns>KRN code, Returns all knights as default.</returns>
         public string GetKernCode(int seed)
         {
             string kern = "";

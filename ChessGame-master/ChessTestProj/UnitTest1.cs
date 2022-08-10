@@ -1,12 +1,14 @@
 using NUnit.Framework;
 using Chess;
+using System.Text;
+using System.Linq;
 
 namespace ChessTestProj
 {
     public class Tests
     {
         [Test]
-        public void Test1()
+        public void DefaultRookPlacement()
         {
             Form1 form = new Form1();
 
@@ -25,7 +27,7 @@ namespace ChessTestProj
         }
 
         [Test]
-        public void NormalKingCheck()
+        public void DefaultKingCheck()
         {
             //kings: 11 & 21
 
@@ -41,7 +43,7 @@ namespace ChessTestProj
         }
 
         [Test]
-        public void NormalQueenCheck()
+        public void DefaultQueenCheck()
         {
             //queens: 12 & 22
 
@@ -57,12 +59,105 @@ namespace ChessTestProj
         }
 
         [Test]
-        public void NinesixtyTest1()
+        public void C960_BadSeed_Low()
         {
             Form1 form = new Form1();
 
+            int seed = -1;
 
+            string result = form.Chess960Positions(seed);
 
+            Assert.AreEqual("rnbqkbnr", result);
+        }
+
+        [Test]
+        public void C960_BadSeed_High()
+        {
+            Form1 form = new Form1();
+
+            int seed = 961;
+
+            string result = form.Chess960Positions(seed);
+
+            Assert.AreEqual("rnbqkbnr", result);
+        }
+
+        [Test]
+        public void C960_BadKRNcode()
+        {
+            Form1 form = new Form1();
+
+            int kern_input = 10; // Should be too high for switch
+
+            string result = form.GetKernCode(kern_input);
+
+            int knight_count = 0; // Any valid pattern should have exactly 2
+
+            foreach (char c in result)
+            {
+                if (c == 'n')
+                {
+                    knight_count++;
+                }
+            }
+
+            Assert.IsFalse(knight_count == 2);
+        }
+
+        [Test]
+        public void C960_GoodKRNcode()
+        {
+            Form1 form = new Form1();
+
+            int kern_input = 5; // Switch range from 0-9
+
+            string result = form.GetKernCode(kern_input);
+
+            int knight_count = 0; // Any valid pattern should have exactly 2
+
+            foreach (char c in result)
+            {
+                if (c == 'n')
+                {
+                    knight_count++;
+                }
+            }
+
+            Assert.IsTrue(knight_count == 2);
+        }
+
+        [Test]
+        public void C960_ConsistentSeed()
+        {
+            Form1 form = new Form1();
+
+            int seed = 69;
+
+            string result1 = form.Chess960Positions(seed);
+
+            string result2 = form.Chess960Positions(seed);
+
+            Assert.AreEqual(result1, result2);
+        }
+
+        [Test]
+        public void C960_RandomSeed()
+        {
+            Form1 form = new Form1();
+
+            int seed = 960;
+
+            string result1 = form.Chess960Positions(seed);
+
+            // the test is fast enough that the randoms resolve to the same number. kinda cool
+            // a half second pause is used to fix this
+            System.Threading.Thread.Sleep(500);
+
+            string result2 = form.Chess960Positions(seed);
+
+            Assert.AreNotEqual(result1, result2);
+
+            // Note this test can fail if you are lucky enough to get the same random seed twice
         }
     }
 }

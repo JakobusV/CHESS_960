@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Chess\Chess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
 </Project>
